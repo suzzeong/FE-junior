@@ -1,4 +1,4 @@
-![image](https://github.com/suzzeong/FE-junior/assets/106740065/613acaed-7a21-4e25-a1a4-47b67bdfbb2b)## 목차
+## 목차
 
 1. 자바스크립트 기본기 다지기
    1. [프로토타입과 V8엔진 히든클래스 이해하기](./packages/chapter1/src/a.js)
