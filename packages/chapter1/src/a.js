@@ -25,9 +25,11 @@ function Worker(health) {
 function JuniorEngineer(health, intelligence) {
   this._super(health);
   this._intelligence = intelligence ?? 1;
-  if (this._intelligence > 10) {
-    this._isBornGenius = true;
-  }
+  // if (this._intelligence > 10) {
+  //   this._isBornGenius = true;
+  // }
+  // 문제 C
+  this._isBornGenius = this._intelligence > 10;
 }
 //- 생성자 함수는 수정하지 마세요
 
@@ -41,7 +43,10 @@ Worker.prototype.work = function () {
 };
 
 // JuniorEngineer
-JuniorEngineer.prototype = Object.create(Worker.prototype);
+JuniorEngineer.prototype = Object.create(Worker.prototype, {});
+// 과제 A
+// JuniorEngineer.prototype = new Worker();
+// JuniorEngineer.prototype = Object.setPrototypeOf(Worker.prototype);
 
 JuniorEngineer.prototype._super = function (health) {
   return Worker.call(this, health);

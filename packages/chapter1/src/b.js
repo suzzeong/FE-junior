@@ -39,24 +39,40 @@ class HardWork {
   // }
 
   // 2. 수정한 코드
-  do() {
+  // do() {
+  //   return new Promise((resolve) => {
+  //     let currentIndex = 0;
+
+  //     const executeNextTask = () => {
+  //       if (currentIndex < this._tasks.length) {
+  //         const currentTask = this._tasks[currentIndex];
+  //         currentTask();
+  //         setTimeout(() => {
+  //           currentIndex++;
+  //           executeNextTask();
+  //         }, 0);
+  //       } else {
+  //         resolve();
+  //       }
+  //     };
+
+  //     executeNextTask();
+  //   });
+  // }
+
+  // 좋은 답안
+  _do(start, end) {
+    const tasks = this._tasks.slice(start, end);
+
+    for (let i = 0; i < tasks.length; i++) {
+      tasks[i]();
+    }
+
+    // 비동기로 작업을 분할하고 순서를 보장한다고 Promise만 사용한다면
+    // 우선순위가 높은 microTaskQueue를 계속 점유하기 때문에 병목이 해결되지 않습니다.
+    // setTimeout을 통해 중간에 macroQueue로 작업을 한번 빼줘야 합니다.
     return new Promise((resolve) => {
-      let currentIndex = 0;
-
-      const executeNextTask = () => {
-        if (currentIndex < this._tasks.length) {
-          const currentTask = this._tasks[currentIndex];
-          currentTask();
-          setTimeout(() => {
-            currentIndex++;
-            executeNextTask();
-          }, 0);
-        } else {
-          resolve();
-        }
-      };
-
-      executeNextTask();
+      setTimeout(() => resolve(end), 0);
     });
   }
 
